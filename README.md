@@ -92,7 +92,7 @@ La implementación del juego **Tres en Raya** sigue estrictamente el patrón **M
 ```
 
 ### Funcionamiento de la Aplicación
-1. Al iniciar la app, `HomeScreen.kt` muestra un menú sencillo con los dos juegos disponibles.
+1. Al iniciar la app, `HomeScreen.kt` muestra un menú con los dos juegos disponibles.
 2. Al pulsar **TRES EN RATLLA**, se carga `TicTacToeScreen.kt`, el cual lee `boardState` mediante `collectAsState()`.
 3. Al pulsar una casilla libre, se ejecuta `viewModel.onCellClick(position)`, que llama a `boardState.value.makeMove(position)`.
 4. `BoardModel` calcula las 8 combinaciones ganadoras (3 filas, 3 columnas y 2 diagonales) o comprueba el empate, y retorna una nueva copia inmutable del tablero con `.copy()`.
@@ -102,11 +102,11 @@ La implementación del juego **Tres en Raya** sigue estrictamente el patrón **M
 
 # Sección 3: Conceptos y Métodos Aprendidos
 
-Durante el desarrollo de esta aplicación se han investigado y aplicado los siguientes conceptos clave de Kotlin y Jetpack Compose:
+Durante el desarrollo se han aplicado los siguientes conceptos clave de Kotlin y Jetpack Compose:
 
 1. **`StateFlow` y `MutableStateFlow`**:
    - `MutableStateFlow` es un contenedor de estado reactivo y mutable de Kotlin Coroutines. Se utiliza dentro del ViewModel de forma privada para modificar el estado.
-   - `asStateFlow()` expone dicho flujo en versión de solo lectura (`StateFlow`) hacia la UI para proteger la encapsulación.
+   - `asStateFlow()` expone este flujo en versión de solo lectura (`StateFlow`) hacia la UI para proteger la encapsulación.
 
 2. **`collectAsState()`**:
    - Función de extensión de Compose que transforma un `StateFlow` en un `State<T>` de Compose. Permite que cualquier composable observe los cambios del flujo y se recomponga automáticamente al recibir un nuevo valor.

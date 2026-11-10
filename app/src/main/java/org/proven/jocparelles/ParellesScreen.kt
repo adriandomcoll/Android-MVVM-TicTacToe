@@ -32,6 +32,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 
+/**
+ * Pantalla composable para el Juego de les Parelles.
+ *
+ * @param onBackToMenu Acción para regresar al menú principal.
+ * @param viewModel ViewModel del juego obtenido de Compose.
+ */
 @Composable
 fun ParellesScreen(
     onBackToMenu: () -> Unit,
@@ -40,7 +46,7 @@ fun ParellesScreen(
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
-        // Fondo
+        // Imagen de fondo (fondo2.jpg) adaptada al tamaño completo de la pantalla
         Image(
             painter = painterResource(id = R.drawable.fondo2),
             contentDescription = null,
@@ -55,7 +61,7 @@ fun ParellesScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.SpaceBetween
         ) {
-            // Fila superior: Botó de Menú i Títol
+            // Barra superior: Botón de regresar al menú y título del juego
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
@@ -80,14 +86,14 @@ fun ParellesScreen(
                 )
             }
 
-            // Cuadrícula de 6 cartes (2 filas x 3 columnas)
+            // Cuadrícula de 6 cartas organizada en 2 filas por 3 columnas
             val cards = viewModel.cards
             if (cards.size >= 6) {
                 Column(
                     modifier = Modifier.fillMaxWidth(),
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
-                    // Fila 1
+                    // Fila 1 (Cartas 0, 1, 2)
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.spacedBy(12.dp)
@@ -112,7 +118,7 @@ fun ParellesScreen(
                         )
                     }
 
-                    // Fila 2
+                    // Fila 2 (Cartas 3, 4, 5)
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.spacedBy(12.dp)
@@ -139,7 +145,7 @@ fun ParellesScreen(
                 }
             }
 
-            // Botó de reinici
+            // Botón inferior para reiniciar la partida
             Button(
                 onClick = { viewModel.onRestartClick() },
                 colors = ButtonDefaults.buttonColors(
@@ -159,7 +165,7 @@ fun ParellesScreen(
             }
         }
 
-        // Diàleg al guanyar
+        // Diálogo modal de victoria al completar todas las parejas
         if (viewModel.isGameOver) {
             AlertDialog(
                 onDismissRequest = { },
@@ -175,6 +181,9 @@ fun ParellesScreen(
     }
 }
 
+/**
+ * Componente que renderiza una carta individual con reverso o imagen frontal según su estado.
+ */
 @Composable
 fun CardItem(
     card: CardModel,
